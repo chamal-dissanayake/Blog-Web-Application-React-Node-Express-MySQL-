@@ -8,11 +8,11 @@ import moment from "moment";
 const Write = () => {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.title || "");
-  const [title, setTitle] = useState(state?.desc || "");
+  const [title, setTitle] = useState(state?.des || "");
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const upload = async () => {
     try {
@@ -33,18 +33,18 @@ const Write = () => {
       state
         ? await axios.put(`/posts/${state.id}`, {
             title,
-            desc: value,
+            des: value,
             cat,
             img: file ? imgUrl : "",
           })
         : await axios.post(`/posts/`, {
             title,
-            desc: value,
+            des: value,
             cat,
             img: file ? imgUrl : "",
             date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           });
-          navigate("/")
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -96,48 +96,48 @@ const Write = () => {
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "art"}
+              checked={cat === "DogBreeds"}
               name="cat"
-              value="art"
-              id="art"
+              value="DogBreeds"
+              id="DogBreeds"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="art">Art</label>
+            <label htmlFor="DogBreeds">Adoption and Rescue</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "science"}
+              checked={cat === "TrainingTips"}
               name="cat"
-              value="science"
-              id="science"
+              value="TrainingTips"
+              id="TrainingTips"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="science">Science</label>
+            <label htmlFor="TrainingTips">Training Tips</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "technology"}
+              checked={cat === "NutritionandRecipes"}
               name="cat"
-              value="technology"
-              id="technology"
+              value="NutritionandRecipes"
+              id="NutritionandRecipes"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="technology">Technology</label>
+            <label htmlFor="NutritionandRecipes">Nutrition and Recipes</label>
           </div>
           <div className="cat">
             <input
               type="radio"
-              checked={cat === "cinema"}
+              checked={cat === "HealthandWellness"}
               name="cat"
-              value="cinema"
-              id="cinema"
+              value="HealthandWellness"
+              id="HealthandWellness"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="cinema">Cinema</label>
+            <label htmlFor="HealthandWellness">Health and Wellness</label>
           </div>
-          <div className="cat">
+          {/* <div className="cat">
             <input
               type="radio"
               checked={cat === "design"}
@@ -147,18 +147,18 @@ const Write = () => {
               onChange={(e) => setCat(e.target.value)}
             />
             <label htmlFor="design">Design</label>
-          </div>
-          <div className="cat">
+          </div> */}
+          {/* <div className="cat">
             <input
               type="radio"
-              checked={cat === "food"}
+              checked={cat === "Contact Us"}
               name="cat"
-              value="food"
-              id="food"
+              value="Contact Us"
+              id="Contact Us"
               onChange={(e) => setCat(e.target.value)}
             />
-            <label htmlFor="food">Food</label>
-          </div>
+            <label htmlFor="Contact Us">Contact Us</label>
+          </div> */}
         </div>
       </div>
     </div>

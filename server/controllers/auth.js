@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
   //CHECK EXISTING USER
-  const q = "SELECT * FROM users WHERE email = ? OR username = ?";
+  const q = "SELECT * FROM user WHERE email = ? OR username = ?";
 
   db.query(q, [req.body.email, req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
@@ -14,7 +14,7 @@ export const register = (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
-    const q = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)";
+    const q = "INSERT INTO user(`username`,`email`,`password`) VALUES (?)";
     const values = [req.body.username, req.body.email, hash];
 
     db.query(q, [values], (err, data) => {
@@ -27,7 +27,7 @@ export const register = (req, res) => {
 export const login = (req, res) => {
   //CHECK USER
 
-  const q = "SELECT * FROM users WHERE username = ?";
+  const q = "SELECT * FROM user WHERE username = ?";
 
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
@@ -55,8 +55,11 @@ export const login = (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.clearCookie("access_token",{
-    sameSite:"none",
-    secure:true
-  }).status(200).json("User has been logged out.")
+  res
+    .clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .json("User has been logged out.");
 };
