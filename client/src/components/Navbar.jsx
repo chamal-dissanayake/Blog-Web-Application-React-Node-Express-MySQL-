@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="links">
           <Link className="link" to="/?cat=DogBreeds">
             <h6>
-              Dog Breeds<b>|</b>
+              Adoption and Rescue<b>|</b>
             </h6>
           </Link>
           <Link className="link" to="/?cat=TrainingTips">
